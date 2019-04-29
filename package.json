@@ -1,0 +1,27 @@
+{
+  "name": "electiondapp",
+  "version": "1.0.0",
+  "description": "Blockchain And Apps Project",
+  "main": "truffle-config.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "dev": "lite-server",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/JonathanPinder/ElectiondApp.git"
+  },
+  "author": "Dilanny,Luong,David,Daryna,Jonathan",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/JonathanPinder/ElectiondApp/issues"
+  },
+  "homepage": "https://github.com/JonathanPinder/ElectiondApp#readme",
+  "devDependencies": {
+    "lite-server": "^2.3.0",
+    "truffle": "5.0.2"
+  }
+}
