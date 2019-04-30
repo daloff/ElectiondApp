@@ -23,20 +23,22 @@ This program uses Ethereum blockchain via Metamask and Ganache to provide basic 
 
 -------
 ### How to Run
-> Run the following commands from the root ElectionApp folder:
+> Run the following commands from the root ElectiondApp folder:
 ```sh
 # compile contracts
-../ElectionApp> truffle compile
+../ElectiondApp> truffle compile
 
 # deploy contracts to Ganache
 ../ElectionApp> truffle migrate --reset
 
 # nagivate to client code
-../ElectionApp> cd client
+../ElectiondApp> cd client
 
 # install client dependencies - this may take a few minutes
-../ElectionApp/client> npm install
+../ElectiondApp/client> npm install
 
 # run the client app that should automatically open in your browser
-../ElectionApp/client> npm start run
+../ElectiondApp/client> npm start run
 ```
+### Screenshot
+![Election dApp](/screenshot.jpg)
