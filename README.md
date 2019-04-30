@@ -20,6 +20,8 @@ This program uses Ethereum blockchain via Metamask and Ganache to provide basic 
       * Personal Ethereum blockchain that can be run locally
     * [Metamask](https://metamask.io/)
       * Bridges frontend with backend by injecting a web3 instance into the window object of the browser
+    * [React App](https://github.com/facebook/create-react-app)
+      * This app uses React App for its frontend UI
 
 -------
 ### How to Run
