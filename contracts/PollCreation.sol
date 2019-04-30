@@ -3,7 +3,6 @@ pragma solidity ^0.5.0;
 /*We are creating our contract Poll Creation as outlined in our Project Proposal
 */
 contract PollCreation{
-
 //This struct represents the information we need to have for Voters in our Polling decentralized application
     struct Voter{
         bool voted; //Has this voter already voted?
@@ -16,9 +15,9 @@ contract PollCreation{
         bytes32 pollName; //Small Poll size names
         uint voteCount; //number of votes
     }
-        //------------------------State Variables-------------------------
-    //Count number of Polls created
-    uint public numberofPolls=0;	
+    
+    
+    //------------------------State Variables-------------------------
 	//Creator of the contract. Will be used to set limits on fuction usage.
     address public pollOwner;
     uint public pollVotingStarts;
@@ -26,6 +25,7 @@ contract PollCreation{
     uint public timeAlottedForVoting;
     //Status of the Poll created
     string public pollStatus;
+	string public pollName;
     //Checks if poll is open or not
     bool pollEnded;
     //For Voters 
@@ -34,9 +34,8 @@ contract PollCreation{
     mapping(uint => Poll) public polls;
     //Count the number of voters
     uint public numberofVoters;
-    string public pollName;
-
-    
+    //Count number of Polls created
+    uint public numberofPolls;
     
 	
 	//The modifier allows us to check for condition before executing a function
@@ -75,6 +74,18 @@ contract PollCreation{
 	    
 	}
 	
+	function getPollStatus() view public returns(string memory) {
+		return pollStatus;
+	}
+
+	function setPollStatus(string memory _pollStatus) public {
+		pollStatus = _pollStatus;
+	}
+
+	function getPollName() view public returns(string memory) {
+		return pollName;
+	}
+
 	function setPollName(string memory _pollName) public {
 		pollName = _pollName;
 	}

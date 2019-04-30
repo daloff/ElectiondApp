@@ -5,12 +5,13 @@ import getWeb3 from "./utils/getWeb3";
 import "./App.css";
 
 class App extends Component {
-  state = { pollStatus: "", web3: null, accounts: null, contract: null, newName:"" };
+  state = { pollStatus: "", pollName: "", newPollName: "", web3: null, accounts: null, contract: null };
 
   componentDidMount = async () => {
     try {
-      this.handleChange = this.handleChange.bind(this);
       this.handleSubmit = this.handleSubmit.bind(this);
+      this.handleChange = this.handleChange.bind(this);
+
       // Get network provider and web3 instance.
       const web3 = await getWeb3();
 
@@ -25,6 +26,7 @@ class App extends Component {
         deployedNetwork && deployedNetwork.address,
       );
 
+      const candidates = ['Donalt Trump', 'Barack Obama']
 
       // Set web3, accounts, and contract to the state, and then proceed with an
       // example of interacting with the contract's methods.
@@ -34,24 +36,15 @@ class App extends Component {
       alert(
         `Failed to load web3, accounts, or contract. Check console for details.`,
       );
-
       console.error(error);
     }
   };
 
-  handleChange(event){
-    this.setState({newName:event.target.value});
-  }
-  async handleSubmit(event){
-    //Stops browser from refreshing onSubmit
-    event.preventDefault();
-    const { accounts, contract } = this.state;
-    await contract.methods.setPollName(this.state.newName, {from:accounts[0]});
-  }
-
   runExample = async () => {
     const { contract } = this.state;
 
+    // Stores a given value, 5 by default.
+    // await contract.methods.set(5).send({ from: accounts[0] });
 
     // Get the value from the contract to prove it worked.
     const response = await contract.methods.getPollStatus().call();
@@ -67,18 +60,16 @@ class App extends Component {
     this.setState(this.state);
   }
 
-  createThePoll = async(status) => {
-    const {accounts, contract} = this.state;
-    await contract.methods.constructor(status,status).send({ from: accounts[0]});
-    this.state.constructor=status;
-    this.setState(this.state);
+  handleChange(event) {
+    this.setState({pollName: event.target.value});
   }
-  updateNewname = async(status) => {
-    const {accounts, contract} = this.state;
-    await contract.methods.setPollName(status).send({ from: accounts[0]});
-    this.state.setPollName = status;
-    this.setState(this.state);
-    
+
+  handleSubmit = async (event) => {
+    event.preventDefault();
+
+    const { accounts, contract, pollName } = this.state;
+    await contract.methods.setPollName(pollName).send({ from: accounts[0] });
+    this.setState({newPollName: pollName});
   }
 
   render() {
@@ -87,27 +78,26 @@ class App extends Component {
     }
     return (
       <div className="App">
-        <h1>Decentralized Polling</h1>
+        <img src={require("./logo.jpg")} width="100%"/>
+        <h1>Decentralized Polling - The New Approach</h1>
         <p>Ready to start poll?</p>
-        <h2>The new approach</h2>
         <p>
-          <div> Poll Name: {this.state.pollName}</div>
+          <div> Poll Name: {this.state.newPollName}</div>
           <form onSubmit={this.handleSubmit}>
-            <input type="text" value={this.state.newValue} onChange={this.handleChange.bind(this)}/>
-            <input type="submit" value="Submit" onClick={()=>this.updateNewname('Put there')}/>
+            <input type="text" value={this.state.pollName} onChange={this.handleChange}/>
+            <input type="submit" value="Submit" />
           </form>
         </p>
         <p>
         </p>
-        <div>The stored value is: {this.state.pollStatus}</div>
+        <div>Poll Status: {this.state.pollStatus}</div>
         <div>
           <button type="submit" onClick={() => this.updatePollStatus('Poll is opened')}>
             Open Poll
           </button>
           <button type="submit" onClick={() => this.updatePollStatus('Poll is closed')}>
             Close Poll
-          </button>    
-          <button type="submit" onClick={() => this.createThePoll('Poll One')}>Create</button>      
+          </button>
         </div>
       </div>
     );
