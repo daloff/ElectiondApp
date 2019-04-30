@@ -1,5 +1,8 @@
 ## Election dApp
 
+### Developed By
+> Daryna Aloff | Jonathan Pinder | Dilianny Lakitaya
+
 ### Description
 This program uses Ethereum blockchain via Metamask and Ganache to provide basic functionality of an election polling
 
